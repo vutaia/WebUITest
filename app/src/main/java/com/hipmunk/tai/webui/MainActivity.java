@@ -13,8 +13,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mWebView = (WebView) findViewById(R.id.webview);
+        mWebView.setWebViewClient(new WebViewClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl("www.google.com");
+        mWebView.loadUrl("http://www.google.com");
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mWebView==null) {
+            super.onBackPressed();
+        } else {
+            if (mWebView.canGoBack()) {
+                mWebView.goBack();
+            } else {
+                super.onBackPressed();
+            }
+        }
+    }
 }
